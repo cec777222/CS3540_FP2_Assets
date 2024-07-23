@@ -6,7 +6,7 @@ public class PlayerBehavior : MonoBehaviour
 {
     public static int playerHealth = 100;
     public float playerSpeed = 2f;
-    public float playerDamage = 10f;
+    public int playerDamage = 10;
     Rigidbody rb;
     int damageRate;
     bool isBlocking;
@@ -39,21 +39,30 @@ public class PlayerBehavior : MonoBehaviour
             isBlocking = false;
             playerRender.material.color = Color.white;
         }
+        /*if (Input.GetMouseButton(0))
+        {
+           var weapon = GetComponent<WeaponBehavior>();
+            weapon.Chop();
+        }*/
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (!isBlocking)
         {
             damageRate = 1;
-            playerHealth -= (damage * damageRate);
+            
         }
-        
+        else
+        {
+            damageRate = 0;
+        }
+        playerHealth -= (damage * damageRate);
     }
 
     void Attack()
     {
-        //run animation
+        
 
     }
 
@@ -61,7 +70,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            //call enemy damage method
+            //var enemy = GetComponent<CubeEnemyBehavior>();
+            //enemy.EnemyAttacked(playerDamage);
         }
     }
 }
