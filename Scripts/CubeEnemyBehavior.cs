@@ -10,6 +10,7 @@ public class CubeEnemyBehavior : MonoBehaviour
     public float moveSpeed = 1;
     public float minDistance = 1.5f;
     public float detectDistance = 10f;
+
     private bool notDetected;
 
     //For player interaction.
@@ -23,7 +24,7 @@ public class CubeEnemyBehavior : MonoBehaviour
     public float duration = 2f; // Duration of the rotation
     private bool hasNotRotated;
     float elapsedTime;
-    public int damageGiven;
+    public int damageGiven = 1;
 
     void Start()
     {
@@ -135,7 +136,6 @@ public class CubeEnemyBehavior : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && attackMode)
         {
-            damageGiven = 10;
             var playerHealth = collision.gameObject.GetComponent<PlayerBehavior>();
             playerHealth.TakeDamage(damageGiven);
             

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerBehavior : MonoBehaviour
 {
-    public static int playerHealth = 100;
+    public static int heartCount = 3;
     public float playerSpeed = 2f;
     public int playerDamage = 10;
+
     Rigidbody rb;
     int damageRate;
     bool isBlocking;
@@ -23,7 +24,7 @@ public class PlayerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         float horizontal = Input.GetAxis("Horizontal");
+        float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 moveVector = new Vector3(horizontal, 0, vertical);
         rb.AddForce(moveVector * playerSpeed);
@@ -39,11 +40,13 @@ public class PlayerBehavior : MonoBehaviour
             isBlocking = false;
             playerRender.material.color = Color.white;
         }
-        /*if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0))
         {
-           var weapon = GetComponent<WeaponBehavior>();
-            weapon.Chop();
-        }*/
+            GameObject weapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
+
+            weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
+
+        }
     }
 
     public void TakeDamage(int damage)
@@ -57,13 +60,11 @@ public class PlayerBehavior : MonoBehaviour
         {
             damageRate = 0;
         }
-        playerHealth -= (damage * damageRate);
+        heartCount -= (damage * damageRate);
     }
 
     void Attack()
     {
-        
-
     }
 
     private void OnTriggerEnter(Collider other)
