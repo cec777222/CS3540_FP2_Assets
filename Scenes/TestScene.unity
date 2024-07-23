@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWeapon
       objectReference: {fileID: 0}
+    - target: {fileID: 3453919324017353407, guid: f4ddc2604a5a75b4d850cd6c8ada249f, type: 3}
+      propertyPath: m_TagString
+      value: PlayerWeapon
+      objectReference: {fileID: 0}
     - target: {fileID: 6559586429720432396, guid: f4ddc2604a5a75b4d850cd6c8ada249f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.349
@@ -512,6 +516,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 724549936513328052, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4961596199568000443, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.6270514

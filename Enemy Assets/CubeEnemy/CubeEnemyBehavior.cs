@@ -99,6 +99,7 @@ public class CubeEnemyBehavior : MonoBehaviour
 
             }
         }
+        Debug.Log(currentHealth);
     }
 
     //Resets variable for spin attack.
@@ -141,4 +142,6 @@ public class CubeEnemyBehavior : MonoBehaviour
             
         }
     }
+
+   
 }

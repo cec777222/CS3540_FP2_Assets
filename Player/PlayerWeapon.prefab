@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: -6521343958735799825}
   m_Layer: 0
   m_Name: PlayerWeapon
-  m_TagString: Untagged
+  m_TagString: WeaponSwung
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
