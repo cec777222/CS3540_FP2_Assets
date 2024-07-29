@@ -4190,6 +4190,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 6749019640489016873, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: lootPrefabs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749019640489016873, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: lootPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1825169943741794320, guid: 0dfcd0430d1449d4dad9a6c3c81bb77d, type: 3}
+    - target: {fileID: 6749019640489016873, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: lootPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 7749533367711679839, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
+    - target: {fileID: 6749019640489016873, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: lootPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7181998423924743994, guid: 6dfa186c65d70d44e84cf35ebd4b906d, type: 3}
     - target: {fileID: 9028540806842956373, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
       propertyPath: m_Constraints
       value: 80

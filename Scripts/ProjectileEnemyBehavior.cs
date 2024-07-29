@@ -16,7 +16,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
     // For enemy death and loot pickup.
     public AudioClip deadSFX;
-    public GameObject lootPrefab;
+    public GameObject[] lootPrefabs;
 
     // Start is called before the first frame update
     void Start()
@@ -92,11 +92,12 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     void EnemyDies()
     {
         AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-        //death animation - put here.
-        gameObject.SetActive(false);
-        Destroy(gameObject, 0.5f);
-        Instantiate(lootPrefab, transform.position, transform.rotation);
-    }
 
-    
+        if (lootPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, lootPrefabs.Length);
+            Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        }
+        Destroy(gameObject, 0.5f);
+    }
 }

@@ -20,7 +20,7 @@ public class CubeEnemyBehavior : MonoBehaviour
 
     // For enemy death and loot pickup.
     public AudioClip deadSFX;
-    public GameObject lootPrefab;
+    public GameObject[] lootPrefabs;
 
     //For cube spin attack.
     private float degreeRotated;
@@ -51,6 +51,8 @@ public class CubeEnemyBehavior : MonoBehaviour
         degreeRotated = 0f;
         degreeToRotate = 0.01f;
         maxDegreeRotation = 2.7f;
+
+        Invoke("EnemyDies", 3f);
     }
 
     void Update()
@@ -128,11 +130,14 @@ public class CubeEnemyBehavior : MonoBehaviour
     //Class that destroys the enemy and gives the pickup.
     void EnemyDies()
     {
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-        //death animation - put here.
-        gameObject.SetActive(false);
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        
+        if (lootPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, lootPrefabs.Length);
+            Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        }
         Destroy(gameObject, 0.5f);
-        Instantiate(lootPrefab, transform.position, transform.rotation);
     }
 
     void OnTriggerEnter(Collider collision)
