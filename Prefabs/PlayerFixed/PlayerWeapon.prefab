@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 6559586429720432396}
   - component: {fileID: 100878844358501656}
   - component: {fileID: 7199092315526788569}
-  - component: {fileID: -6521343958735799825}
   m_Layer: 0
   m_Name: PlayerWeapon
   m_TagString: WeaponSwung
@@ -182,18 +181,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6521343958735799825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3453919324017353407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971caa2103659b943b455d3ab0aed652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4111237771093781869
 GameObject:
   m_ObjectHideFlags: 0
