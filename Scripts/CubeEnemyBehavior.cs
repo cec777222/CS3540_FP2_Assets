@@ -10,21 +10,25 @@ public class CubeEnemyBehavior : MonoBehaviour
     public float moveSpeed = 1;
     public float minDistance = 1.5f;
     public float detectDistance = 10f;
-
     private bool notDetected;
 
     //For player interaction.
     public int startingHealth = 30; //Assuming a player's attack is 10 damage.
     int currentHealth;
-    public AudioClip deadSFX;
     private bool moveToPlayer;
     private bool attackMode;
 
+    // For enemy death and loot pickup.
+    public AudioClip deadSFX;
+    public GameObject[] lootPrefabs;
+
     //For cube spin attack.
-    public float duration = 2f; // Duration of the rotation
+    private float degreeRotated;
+    public float degreeToRotate;
     private bool hasNotRotated;
-    float elapsedTime;
-    public int damageGiven = 1;
+    public int damageGiven;
+    public float maxDegreeRotation;
+    Quaternion originalRotation;
 
     void Start()
     {
@@ -41,11 +45,14 @@ public class CubeEnemyBehavior : MonoBehaviour
         moveToPlayer = false;
         attackMode = false;
         hasNotRotated = true;
-        hasNotRotated = true;
         notDetected = true;
 
-        //Time tracker for spin attack.
-        elapsedTime = 0f;
+        //Tracker for spin attack.
+        degreeRotated = 0f;
+        degreeToRotate = 0.01f;
+        maxDegreeRotation = 2.7f;
+
+        Invoke("EnemyDies", 3f);
     }
 
     void Update()
@@ -69,48 +76,45 @@ public class CubeEnemyBehavior : MonoBehaviour
             if (minDistance < distance && moveToPlayer)
             {
                 attackMode = false;
-                //gameObject.GetComponent<Animator>().SetTrigger("PlayerDetected");
                 transform.position = Vector3.MoveTowards
                 (transform.position,
                 new Vector3(player.position.x, transform.position.y, player.position.z),
                 step);
             }
 
-            //Preforms the spin attack every 3 seconds.
+            //Performs the spin attack every 3 seconds.
             if (distance <= minDistance)
             {
                 attackMode = true;
-                //gameObject.GetComponent<Animator>().SetTrigger("AttackDistance");
-                //Quaternion originalRotation = transform.rotation;
-                if (elapsedTime < duration && hasNotRotated)
+                if (hasNotRotated)
                 {
-                    transform.Rotate(Vector3.down, 360 * Time.deltaTime * 0.5f);
-                    elapsedTime += Time.deltaTime;
-                    //Debug.Log("Elapsed time: " + elapsedTime + ". Duration: " + duration);
+                    if (degreeRotated == 0){
+                        originalRotation = transform.rotation;
+                    }
+                    if (degreeRotated < maxDegreeRotation){
+                        //Debug.Log("Degree Rotated: " + degreeRotated);
+                        degreeRotated += degreeToRotate;
+                        transform.Rotate(Vector3.down, degreeRotated);  
+                    }
+                    else{
+                        hasNotRotated = false;
+                        transform.rotation = originalRotation;
+                        Invoke("AttackAgain", 3f);
+                    }
                 }
-                if (elapsedTime > duration)
-                {
-                    Debug.Log("Elapsed time: " + elapsedTime + ". Duration: " + duration);
-                    //transform.rotation = originalRotation;
-                    //transform.LookAt(player);
-                    attackMode = false;
-                    hasNotRotated = false;
-                    Invoke("AttackAgain", 3f);
-                }
-
             }
         }
+        //Debug.Log(currentHealth);
     }
 
     //Resets variable for spin attack.
     void AttackAgain()
     {
-        elapsedTime = 0f;
         hasNotRotated = true;
+        degreeRotated = 0f;
     }
 
-
-    //Public class for for player to call when they deal damage to the enemy.
+    //Public class for player to call when they deal damage to the enemy.
     public void EnemyAttacked(int damageTaken)
     {
         if (currentHealth > 0)
@@ -126,19 +130,37 @@ public class CubeEnemyBehavior : MonoBehaviour
     //Class that destroys the enemy and gives the pickup.
     void EnemyDies()
     {
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
-        gameObject.SetActive(false);
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+
+        
+        if (lootPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, lootPrefabs.Length);
+            Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
+        }
+
         Destroy(gameObject, 0.5f);
-        //Instantiate(prefab);
     }
 
     void OnTriggerEnter(Collider collision)
     {
+        
+        
         if (collision.gameObject.CompareTag("Player") && attackMode)
         {
-            var playerHealth = collision.gameObject.GetComponent<PlayerBehavior>();
-            playerHealth.TakeDamage(damageGiven);
+            damageGiven = 10;
+            var player = GetComponent<PlayerBehavior>();
+            player.TakeDamage(damageGiven);
             
+
+        }
+        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        {
+            Debug.Log("HIT");
+           
+            EnemyAttacked(10);
         }
     }
+
+   
 }

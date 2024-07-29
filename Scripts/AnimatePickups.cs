@@ -8,12 +8,13 @@ public class AnimatePickups : MonoBehaviour
     public float floatHeight = 0.5f;
     public float floatFrequency = 0.5f;
 
-    public Color emissionColor = Color.yellow; 
-    public float emissionIntensity = 1.0f; 
+    public Color emissionColor = Color.yellow;
+    public float emissionIntensity = 1.0f;
     public float pulseSpeed = 2f;
-    
+
     private Material material;
     private Vector3 startPosition;
+    private bool isAnimating = false; 
 
     void Start()
     {
@@ -22,10 +23,23 @@ public class AnimatePickups : MonoBehaviour
         material = GetComponent<Renderer>().material;
         material.EnableKeyword("_EMISSION");
     }
+    
+    void OnEnable()
+    {
+        isAnimating = true;
+    }
 
+    void OnDisable()
+    {
+        isAnimating = false;
+    }
+    
     // Update is called once per frame
     void Update()
     {
+        if (!isAnimating) return;
+
+        
         transform.Rotate(Vector3.up * rotationAmount * Time.deltaTime);
 
         float floatingObjects = startPosition.y + Mathf.Abs(Mathf.Sin(Time.time * floatFrequency)) * floatHeight;
@@ -36,4 +50,3 @@ public class AnimatePickups : MonoBehaviour
         material.SetColor("_EmissionColor", finalColor);
     }
 }
-
