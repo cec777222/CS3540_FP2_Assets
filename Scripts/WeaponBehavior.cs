@@ -22,14 +22,19 @@ public class WeaponBehavior : MonoBehaviour
         //GetComponent<Animator>().SetTrigger("WeaponSwung");
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("HIT");
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            var player = GetComponent<PlayerBehavior>();
-            player.Attack(other);
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other != null)
+    //    {
+    //        Debug.Log("HIT");
+    //        if (other.gameObject.CompareTag("Enemy"))
+    //        {
+    //            var player = GetComponent<PlayerBehavior>();
+    //            player.Attack(other);
 
-        }
-    }
+    //        }
+    //    }
+    //}
+
+    
 }

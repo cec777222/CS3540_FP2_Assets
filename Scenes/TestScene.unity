@@ -396,6 +396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2776947541752224812, guid: 9ea6481bb9bf682418b2fc49ec05095f, type: 3}
+      propertyPath: lookSensitivity
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 3317177833653848145, guid: 9ea6481bb9bf682418b2fc49ec05095f, type: 3}
       propertyPath: m_Name
       value: Player
@@ -563,6 +567,10 @@ PrefabInstance:
     - target: {fileID: 5785287698224930300, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 5785287698224930300, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9028540806842956373, guid: 23d74f06f2517b047883de1cd958b041, type: 3}
       propertyPath: m_Constraints

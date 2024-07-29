@@ -89,7 +89,7 @@ public class CubeEnemyBehavior : MonoBehaviour
                 }
                 if (elapsedTime > duration)
                 {
-                    Debug.Log("Elapsed time: " + elapsedTime + ". Duration: " + duration);
+                   // Debug.Log("Elapsed time: " + elapsedTime + ". Duration: " + duration);
                     //transform.rotation = originalRotation;
                     //transform.LookAt(player);
                     attackMode = false;
@@ -99,7 +99,7 @@ public class CubeEnemyBehavior : MonoBehaviour
 
             }
         }
-        Debug.Log(currentHealth);
+        //Debug.Log(currentHealth);
     }
 
     //Resets variable for spin attack.
@@ -126,7 +126,7 @@ public class CubeEnemyBehavior : MonoBehaviour
     //Class that destroys the enemy and gives the pickup.
     void EnemyDies()
     {
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         gameObject.SetActive(false);
         Destroy(gameObject, 0.5f);
         //Instantiate(prefab);
@@ -134,12 +134,20 @@ public class CubeEnemyBehavior : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
+        
+        
         if (collision.gameObject.CompareTag("Player") && attackMode)
         {
             damageGiven = 10;
-            var playerHealth = collision.gameObject.GetComponent<PlayerBehavior>();
-            playerHealth.TakeDamage(damageGiven);
+            var player = GetComponent<PlayerBehavior>();
+            player.TakeDamage(damageGiven);
             
+        }
+        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        {
+            Debug.Log("HIT");
+           
+            EnemyAttacked(10);
         }
     }
 

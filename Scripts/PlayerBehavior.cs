@@ -29,7 +29,8 @@ public class PlayerBehavior : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        
+
+
         Vector3 moveVector = new Vector3(horizontal, 0, vertical);
         rb.AddForce(moveVector * playerSpeed);
 
@@ -72,12 +73,15 @@ public class PlayerBehavior : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            //var enemy = GetComponent<CubeEnemyBehavior>();
-            //enemy.EnemyAttacked(playerDamage);
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other != null)
+    //    {
+    //        if (other.CompareTag("Enemy"))
+    //        {
+    //            var enemy = GetComponent<CubeEnemyBehavior>();
+    //            enemy.EnemyAttacked(playerDamage);
+    //        }
+    //    }
+    //}
 }
