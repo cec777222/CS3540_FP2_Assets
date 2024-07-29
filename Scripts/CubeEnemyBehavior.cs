@@ -91,7 +91,6 @@ public class CubeEnemyBehavior : MonoBehaviour
                     if (degreeRotated == 0){
                         originalRotation = transform.rotation;
                     }
-
                     if (degreeRotated < maxDegreeRotation){
                         //Debug.Log("Degree Rotated: " + degreeRotated);
                         degreeRotated += degreeToRotate;
@@ -105,6 +104,7 @@ public class CubeEnemyBehavior : MonoBehaviour
                 }
             }
         }
+        //Debug.Log(currentHealth);
     }
 
     //Resets variable for spin attack.
@@ -131,22 +131,36 @@ public class CubeEnemyBehavior : MonoBehaviour
     void EnemyDies()
     {
         //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+
         
         if (lootPrefabs.Length > 0)
         {
             int randomIndex = Random.Range(0, lootPrefabs.Length);
             Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
+
         Destroy(gameObject, 0.5f);
     }
 
     void OnTriggerEnter(Collider collision)
     {
+        
+        
         if (collision.gameObject.CompareTag("Player") && attackMode)
         {
             damageGiven = 10;
-            var playerHealth = collision.gameObject.GetComponent<PlayerBehavior>();
-            playerHealth.TakeDamage(damageGiven);
+            var player = GetComponent<PlayerBehavior>();
+            player.TakeDamage(damageGiven);
+            
+
+        }
+        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        {
+            Debug.Log("HIT");
+           
+            EnemyAttacked(10);
         }
     }
+
+   
 }
