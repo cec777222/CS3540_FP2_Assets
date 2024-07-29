@@ -170,7 +170,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ed8297fc9bc6034cb9831d0c04c26b1, type: 2}
+  - {fileID: 2100000, guid: 793a111c5f1cb754b93ee1ad42421bf6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5785287698224930300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 612259ee6f39e804ea225d9125fb5770, type: 3}
+  m_Script: {fileID: 11500000, guid: 811c68743e378a442a906c3ea52c5104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
@@ -258,5 +258,7 @@ MonoBehaviour:
   detectDistance: 10
   startingHealth: 30
   deadSFX: {fileID: 0}
-  duration: 2
+  lootPrefab: {fileID: 0}
+  degreeToRotate: 0
   damageGiven: 0
+  maxDegreeRotation: 0
