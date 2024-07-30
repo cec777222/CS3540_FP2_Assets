@@ -252,4 +252,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageGiven: 10
-  playerhitSFX: {fileID: 0}
+  playerhitSFX: {fileID: 8300000, guid: 74f691bc61916442c8eb20bb22125a76, type: 3}
