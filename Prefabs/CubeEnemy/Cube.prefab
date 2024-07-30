@@ -256,9 +256,9 @@ MonoBehaviour:
   moveSpeed: 1
   minDistance: 1.5
   detectDistance: 10
-  startingHealth: 30
-  deadSFX: {fileID: 0}
-  lootPrefab: {fileID: 0}
-  degreeToRotate: 0
   damageGiven: 0
+  startingHealth: 30
+  hitSFX: {fileID: 8300000, guid: 830eaa5af1b254bc3845a9dede2e5410, type: 3}
+  lootPrefabs: []
+  degreeToRotate: 0
   maxDegreeRotation: 0
