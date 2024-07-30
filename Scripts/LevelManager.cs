@@ -6,24 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public static bool isGameOver = false; //Check if game is lost
+
     public Text gameText; //Hidden text that is displayed when game is won or lost
+    //public Text scoreText; // Counting how many enemies are killed
+    public Text timerText;
+
+    public AudioClip gameOverSFX;
+    public AudioClip gameWonSFX;
+
+
+    public static bool isGameOver = false; //Check if game is lost
 
     public float startTimer = 0.00f; //Initialize the time we want the stopwatch to start at
     private float stopWatch; //Stopwatch to time how long player takes
 
+
     void Start()
     {
-        isGameOver = false;
-        stopWatch = startTimer;
-        gameText.gameObject.SetActive(false); // Need to uncheck the gameText box in inspector
-
-
+        InitializeLevel();
     }
 
     void InitializeLevel() // Function that will reset everything when the scene is loaded, for now using the start function
     {
-
+        isGameOver = false;
+        stopWatch = startTimer;
+        gameText.gameObject.SetActive(false); // Need to uncheck the gameText box in inspector
+        stopWatch = startTimer;
     }
 
     
@@ -31,8 +39,28 @@ public class LevelManager : MonoBehaviour
     {
         if (!isGameOver) // If the game is not over, execute
         {
-            stopWatch += Time.deltaTime;
+            UpdateTimer();
+            SetTimerText();
+            //SetScoreText();
         }
+    }
+
+    void SetScoreText()
+    {
+        //EnemySpawner script counting how many enemies have been destroyed.
+
+        //NEED TO UPDATE
+        //scoreText.text = "Enemies Killed: " + CubeEnemyBehavior.enemiesKilled.ToString();
+    }
+
+    void SetTimerText()
+    {
+        timerText.text = stopWatch.ToString("F2");
+    }
+
+    void UpdateTimer()
+    {
+        stopWatch += Time.deltaTime;
     }
 
     public void LevelLost() // Execute if the level is lost

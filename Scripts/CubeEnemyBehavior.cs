@@ -7,9 +7,12 @@ public class CubeEnemyBehavior : MonoBehaviour
 {
     //For player detection and movement.
     public Transform player;
+
     public float moveSpeed = 1;
     public float minDistance = 1.5f;
     public float detectDistance = 10f;
+    public int damageGiven = 10;
+
     private bool notDetected;
 
     //For player interaction.
@@ -19,14 +22,15 @@ public class CubeEnemyBehavior : MonoBehaviour
     private bool attackMode;
 
     // For enemy death and loot pickup.
-    public AudioClip deadSFX;
+    public AudioClip playerhitSFX;
+    public AudioClip enemyHitSFX;
+
     public GameObject[] lootPrefabs;
 
     //For cube spin attack.
     private float degreeRotated;
     public float degreeToRotate;
     private bool hasNotRotated;
-    public int damageGiven;
     public float maxDegreeRotation;
     Quaternion originalRotation;
 
@@ -52,7 +56,7 @@ public class CubeEnemyBehavior : MonoBehaviour
         degreeToRotate = 0.01f;
         maxDegreeRotation = 2.7f;
 
-        Invoke("EnemyDies", 3f);
+
     }
 
     void Update()
@@ -142,25 +146,20 @@ public class CubeEnemyBehavior : MonoBehaviour
         Destroy(gameObject, 0.5f);
     }
 
+   
     void OnTriggerEnter(Collider collision)
-    {
-        
-        
+    {   
         if (collision.gameObject.CompareTag("Player") && attackMode)
         {
-            damageGiven = 10;
-            var player = GetComponent<PlayerBehavior>();
-            player.TakeDamage(damageGiven);
-            
+            PlayerControllerFixed player = collision.gameObject.GetComponent<PlayerControllerFixed>();
+            player.TakeDamage(10);
+            AudioSource.PlayClipAtPoint(playerhitSFX, transform.position);
 
         }
         if (collision.gameObject.CompareTag("PlayerWeapon"))
         {
-            Debug.Log("HIT");
-           
+            AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
             EnemyAttacked(10);
         }
     }
-
-   
 }
