@@ -258,7 +258,11 @@ MonoBehaviour:
   detectDistance: 10
   damageGiven: 0
   startingHealth: 30
-  hitSFX: {fileID: 8300000, guid: 830eaa5af1b254bc3845a9dede2e5410, type: 3}
-  lootPrefabs: []
+  playerhitSFX: {fileID: 8300000, guid: 74f691bc61916442c8eb20bb22125a76, type: 3}
+  enemyHitSFX: {fileID: 8300000, guid: 74f691bc61916442c8eb20bb22125a76, type: 3}
+  lootPrefabs:
+  - {fileID: 1825169943741794320, guid: 0dfcd0430d1449d4dad9a6c3c81bb77d, type: 3}
+  - {fileID: 7749533367711679839, guid: 211991d4b3b5af640a34ebde000936b2, type: 3}
+  - {fileID: 2079530809401394673, guid: 258d7af4f47ef484dafe8d770ab98562, type: 3}
   degreeToRotate: 0
   maxDegreeRotation: 0
