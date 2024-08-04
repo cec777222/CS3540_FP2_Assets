@@ -21,8 +21,6 @@ public class PlayerControllerFixed : MonoBehaviour
     Renderer playerRender;
     GameObject weapon;
     public Slider healthslider;
-
-    int damageRate;
     int currentHealth;
 
     bool isBlocking;
@@ -33,7 +31,6 @@ public class PlayerControllerFixed : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        damageRate = 1;
         isBlocking = false;
         playerRender = GetComponent<Renderer>();
         weapon = GameObject.FindGameObjectWithTag("PlayerWeapon");

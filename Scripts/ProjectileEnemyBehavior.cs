@@ -19,6 +19,8 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     public GameObject[] lootPrefabs;
     public AudioClip enemyHitSFX;
 
+    public static int projectileEnemyCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,9 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
         // Sets health.
         currentHealth = startingHealth;
+
+        projectileEnemyCount += 1;
+
     }
 
     // Update is called once per frame
@@ -92,7 +97,8 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
     void EnemyDies()
     {
-        AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
+        LevelManager.enemyKillCount += 1;
 
         if (lootPrefabs.Length > 0)
         {
@@ -104,10 +110,8 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {   
-        Debug.Log("X");
         if (collision.gameObject.CompareTag("PlayerWeapon"))
         {
-            Debug.Log("HIT");
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
             EnemyAttacked(10);
         }
