@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class PlayerControllerFixed : MonoBehaviour
     Animator playerAnim;
 
     private LevelManager levelManager;
+    public GameObject projectilePrefab;
 
     void Start()
     {
@@ -58,21 +60,67 @@ public class PlayerControllerFixed : MonoBehaviour
         {
             moveDirection = input;
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Shoot();
+        }
         
         moveDirection.y -= gravity * Time.deltaTime;
-        if (controller.velocity.z < 0/*moveHorizontal != 0 || moveVertical != 0*/)
+        if (controller.velocity != Vector3.zero/*moveHorizontal != 0 || moveVertical != 0*/)
         {
+            var c_x = controller.velocity.x;
+            var c_z = controller.velocity.z;
             playerAnim.SetInteger("animState", 1);
+
+            if (c_z < 0)
+            {
+                if (MathF.Abs(c_z) > MathF.Abs(c_x))
+                {
+                    SetWalkAnim("forward");
+                }
+                else
+                {
+                    if (c_x < 0)
+                    {
+                        SetWalkAnim("right");
+                    }
+                    else
+                    {
+                        SetWalkAnim("left");
+                    }
+                }
+            }
+            else
+            {
+                if (MathF.Abs(c_z) > MathF.Abs(c_x))
+                {
+                    SetWalkAnim("back");
+                }
+                else
+                {
+                    if (c_x < 0)
+                    {
+                        SetWalkAnim("right");
+                    }
+                    else
+                    {
+                        SetWalkAnim("left");
+                    }
+                }
+            }
+            
+           
         }
         if(controller.velocity == Vector3.zero ) 
         {
+            NoWalking();
             playerAnim.SetInteger("animState", 0);
         }
         controller.Move(moveDirection * Time.deltaTime);
         if (Input.GetMouseButton(1))
         {
             isBlocking = true;
-
+            playerAnim.SetInteger("animState", 4);
             //playerRender.material.color = Color.blue;
         }
         else
@@ -83,6 +131,7 @@ public class PlayerControllerFixed : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
+            //HOLD DOWN THE BUTTON or you will not see the animation :)
             playerAnim.SetInteger("animState", 3);
             //weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
         }
@@ -109,6 +158,9 @@ public class PlayerControllerFixed : MonoBehaviour
         {
             PlayerDies();
             playerDead = true;
+            playerAnim.SetInteger("animState", 5);
+            playerAnim.SetTrigger("isDead");
+            
         }
     }
 
@@ -116,8 +168,50 @@ public class PlayerControllerFixed : MonoBehaviour
 
     void PlayerDies()
     {
-        transform.Rotate(-90, 0, 0, Space.Self);
-        levelManager.LevelLost();
+        //transform.Rotate(-90, 0, 0, Space.Self);
+        playerAnim.SetInteger("animState", 5);
+        //this line doesnt work because it will set the state to 5 then switch immediately back to 0
+        //levelManager.LevelLost();
     }
+
+    void Shoot()
+    {
+        LevelManager lm = FindObjectOfType<LevelManager>();
+        if (lm.playerCanShoot)
+        {
+            GameObject projectile;
+            projectile = Instantiate(projectilePrefab, transform.position , transform.rotation);
+            projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
+        }
+        
+    }
+
+    void NoWalking()
+    {
+        playerAnim.SetBool("forward", false);
+        playerAnim.SetBool("left", false);
+        playerAnim.SetBool("right", false);
+        playerAnim.SetBool("back", false);
+
+    }
+
+    void SetWalkAnim(string setParam)
+    {
+        foreach (AnimatorControllerParameter parameter in playerAnim.parameters) {
+            if(parameter.type == AnimatorControllerParameterType.Bool)
+            {
+                if (parameter.name == setParam )
+                            {
+                                playerAnim.SetBool(parameter.name, true);
+                            }
+                            else
+                            {
+                                playerAnim.SetBool(parameter.name, false);
+                            }
+            }
+            
+        }
+    }
+
 }
 

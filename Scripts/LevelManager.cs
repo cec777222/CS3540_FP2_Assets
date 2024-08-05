@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
 
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
-
+    public bool playerCanShoot;
     public static bool isGameOver = false; // Check if the game is lost
 
     public float startTimer = 0.00f; // Initialize the time we want the stopwatch to start at
@@ -27,6 +27,7 @@ public class LevelManager : MonoBehaviour
     void InitializeLevel() // Function that will reset everything when the scene is loaded, for now using the start function
     {
         isGameOver = false;
+        playerCanShoot = SceneManager.GetActiveScene().buildIndex != 0;
         stopWatch = startTimer;
         gameText.gameObject.SetActive(false); // Need to uncheck the gameText box in the inspector
         stopWatch = startTimer;

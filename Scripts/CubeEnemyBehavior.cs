@@ -156,7 +156,7 @@ public class CubeEnemyBehavior : MonoBehaviour
             AudioSource.PlayClipAtPoint(playerhitSFX, transform.position);
 
         }
-        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        if (collision.gameObject.CompareTag("PlayerWeapon") || collision.gameObject.CompareTag("PlayerProjectile"))
         {
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
             EnemyAttacked(10);

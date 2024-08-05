@@ -124,6 +124,7 @@ MonoBehaviour:
   hitSFX: {fileID: 8300000, guid: 74f691bc61916442c8eb20bb22125a76, type: 3}
   playerDamage: 10
   healthslider: {fileID: 7077833253566699635, guid: 9a7f9079dee01452983bf4500f91626c, type: 3}
+  projectilePrefab: {fileID: 8728777185694810206, guid: dc3923d7c4fd71341912ad658dce9854, type: 3}
 --- !u!1001 &5864987777834958704
 PrefabInstance:
   m_ObjectHideFlags: 0
