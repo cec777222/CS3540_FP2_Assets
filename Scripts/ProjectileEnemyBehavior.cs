@@ -105,7 +105,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {   
         Debug.Log("X");
-        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        if (collision.gameObject.CompareTag("PlayerWeapon") || collision.gameObject.CompareTag("PlayerProjectile"))
         {
             Debug.Log("HIT");
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
