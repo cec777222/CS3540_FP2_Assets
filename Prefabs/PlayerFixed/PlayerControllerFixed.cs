@@ -18,7 +18,7 @@ public class PlayerControllerFixed : MonoBehaviour
     CharacterController controller;
     Vector3 input, moveDirection;
 
-    Renderer playerRender;
+    //Renderer playerRender;
     GameObject weapon;
     public Slider healthslider;
 
@@ -28,6 +28,8 @@ public class PlayerControllerFixed : MonoBehaviour
     bool isBlocking;
     private bool playerDead = false;
 
+    Animator playerAnim;
+
     private LevelManager levelManager;
 
     void Start()
@@ -35,8 +37,9 @@ public class PlayerControllerFixed : MonoBehaviour
         controller = GetComponent<CharacterController>();
         damageRate = 1;
         isBlocking = false;
-        playerRender = GetComponent<Renderer>();
+        //playerRender = GetComponent<Renderer>();
         weapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
+        playerAnim = GetComponent<Animator>();
 
         currentHealth = playerHealth;
         healthslider.value = currentHealth;
@@ -55,25 +58,33 @@ public class PlayerControllerFixed : MonoBehaviour
         {
             moveDirection = input;
         }
-
+        
         moveDirection.y -= gravity * Time.deltaTime;
+        if (controller.velocity.z < 0/*moveHorizontal != 0 || moveVertical != 0*/)
+        {
+            playerAnim.SetInteger("animState", 1);
+        }
+        if(controller.velocity == Vector3.zero ) 
+        {
+            playerAnim.SetInteger("animState", 0);
+        }
         controller.Move(moveDirection * Time.deltaTime);
-
         if (Input.GetMouseButton(1))
         {
             isBlocking = true;
 
-            playerRender.material.color = Color.blue;
+            //playerRender.material.color = Color.blue;
         }
         else
         {
             isBlocking = false;
-            playerRender.material.color = Color.white;
+            //playerRender.material.color = Color.white;
         }
 
         if (Input.GetMouseButton(0))
         {
-            weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
+            playerAnim.SetInteger("animState", 3);
+            //weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
         }
     }
 
