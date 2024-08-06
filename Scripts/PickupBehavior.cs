@@ -43,11 +43,7 @@ public class PickupBehavior : MonoBehaviour
 
         if (AllPickupsCollected())
         {
-            Debug.Log("You Win!");
-            if (levelManager != null)
-            {
-                levelManager.LevelBeat();
-            }
+            levelManager.LevelBeat();
         }
     }
 

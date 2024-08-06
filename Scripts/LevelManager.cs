@@ -6,18 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-
     public Text gameText; // Hidden text that is displayed when the game is won or lost
-    // public Text scoreText; // Counting how many enemies are killed
+    public Text killCountText; // Counting how many enemies are killed
     public Text timerText;
 
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
-    public bool playerCanShoot;
+    public AudioClip backgroundMusicSFX;
+
     public static bool isGameOver = false; // Check if the game is lost
 
     public float startTimer = 0.00f; // Initialize the time we want the stopwatch to start at
     private float stopWatch; // Stopwatch to time how long the player takes
+
+
+    public static int enemyKillCount;
+
 
     void Start()
     {
@@ -26,11 +30,14 @@ public class LevelManager : MonoBehaviour
 
     void InitializeLevel() // Function that will reset everything when the scene is loaded, for now using the start function
     {
+
         isGameOver = false;
-        playerCanShoot = SceneManager.GetActiveScene().buildIndex != 0;
         stopWatch = startTimer;
         gameText.gameObject.SetActive(false); // Need to uncheck the gameText box in the inspector
         stopWatch = startTimer;
+        enemyKillCount = 0;
+        AudioSource.PlayClipAtPoint(backgroundMusicSFX, transform.position);
+
     }
 
     void Update()
@@ -39,16 +46,14 @@ public class LevelManager : MonoBehaviour
         {
             UpdateTimer();
             SetTimerText();
-            // SetScoreText();
+            SetkillCountText();
         }
     }
 
-    void SetScoreText()
+    void SetkillCountText()
     {
-        // EnemySpawner script counting how many enemies have been destroyed.
+        killCountText.text = "Enemies Killed " + enemyKillCount;
 
-        // NEED TO UPDATE
-        // scoreText.text = "Enemies Killed: " + CubeEnemyBehavior.enemiesKilled.ToString();
     }
 
     void SetTimerText()
@@ -67,7 +72,7 @@ public class LevelManager : MonoBehaviour
         gameText.text = "GAME OVER!";
         gameText.gameObject.SetActive(true); // Game text is initially hidden, unhide it when the game is lost
 
-        // AudioSource.PlayClipAtPoint(gameOverSFX, Camera.main.transform.position); // Audio Clip if we want
+        AudioSource.PlayClipAtPoint(gameOverSFX, Camera.main.transform.position); // Audio Clip if we want
 
         Invoke("LoadCurrentLevel", 2);
     }
@@ -82,11 +87,10 @@ public class LevelManager : MonoBehaviour
         isGameOver = true;
         gameText.text = "YOU WON!";
         gameText.gameObject.SetActive(true);
-        // AudioSource.PlayClipAtPoint(gameWonSFX, Camera.main.transform.position); // Audio Clip if we want
+        AudioSource.PlayClipAtPoint(gameWonSFX, Camera.main.transform.position); // Audio Clip if we want
 
         Invoke("LoadNextLevel", 2);
 
-        // Call Reset Hearts, Timer, and Score function
     }
 
     void LoadNextLevel()
