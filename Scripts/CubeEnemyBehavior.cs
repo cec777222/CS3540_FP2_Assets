@@ -34,6 +34,9 @@ public class CubeEnemyBehavior : MonoBehaviour
     public float maxDegreeRotation;
     Quaternion originalRotation;
 
+
+    public static int cubeEnemyCount;
+
     void Start()
     {
         //Finds the player object.
@@ -56,6 +59,8 @@ public class CubeEnemyBehavior : MonoBehaviour
         degreeToRotate = 0.01f;
         maxDegreeRotation = 2.7f;
 
+
+        cubeEnemyCount += 1;
 
     }
 
@@ -136,6 +141,7 @@ public class CubeEnemyBehavior : MonoBehaviour
     {
         //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
 
+        LevelManager.enemyKillCount += 1;
         
         if (lootPrefabs.Length > 0)
         {
