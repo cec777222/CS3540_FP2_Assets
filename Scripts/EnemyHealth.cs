@@ -8,24 +8,32 @@ public class EnemyHealth : MonoBehaviour
     public int startingHealth = 100;
     public int currentHealth;
     public AudioClip enemyHitSFX;
-    public Slider healthSlider;
+    public Slider enemyHealthSlider;
+
+    private PlayerControllerFixed playerControllerFixedx;
 
     void Awake()
     {
-        healthSlider = GetComponentInChildren<Slider>();
+        enemyHealthSlider = GetComponentInChildren<Slider>();
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject player = GameObject.FindWithTag("Player");
+
         currentHealth = startingHealth;
-        healthSlider.value = currentHealth;
+        enemyHealthSlider.value = currentHealth;
+        playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
+
     }
 
     public void TakeDamage(int damageAmount)
     {
-        if(currentHealth > 0){
+        if(currentHealth > 0)
+        {
             currentHealth -= damageAmount;
-            healthSlider.value = currentHealth;
+            enemyHealthSlider.value = currentHealth;
         }
 
         if(currentHealth <= 0){
@@ -33,12 +41,15 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision)
+
+
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("PlayerWeapon"))
         {
-            AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
-            TakeDamage(10);
+        AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
+        TakeDamage(playerControllerFixedx.playerDamage);
         }
     }
+
 }

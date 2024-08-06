@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -177,19 +177,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.13629685
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.9906681
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -195.667
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2fcb218bae311564bb0644962a1b1d0d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -305,8 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 0
-  enemyHitSFX: {fileID: 0}
-  healthSlider: {fileID: 1546911121594202226}
+  enemyHitSFX: {fileID: 8300000, guid: 9d534a59f39094d52bfec0fbb44e9c52, type: 3}
+  enemyHealthSlider: {fileID: 1546911121594202226}
 --- !u!65 &8634050116901013934
 BoxCollider:
   m_ObjectHideFlags: 0

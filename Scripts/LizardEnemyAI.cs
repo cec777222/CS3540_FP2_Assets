@@ -192,18 +192,22 @@ public class LizardEnemyAI : MonoBehaviour
 
     void UpdateDeadState()
     {
-        m_Animator.SetInteger("AnimationInt", 6);
-        isDead = true;
-        deadTransform = gameObject.transform;
-
-        if (lootPrefabs.Length > 0)
+        if (!isDead)
         {
-            int randomIndex = Random.Range(0, lootPrefabs.Length);
-            Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
-        }
+            LevelManager.enemyKillCount += 1;
+            m_Animator.SetInteger("AnimationInt", 6);
+            isDead = true;
+            deadTransform = gameObject.transform;
 
-        //Instantiate(deadVFX, deadTransform.position, deadTransform.rotation);
-        Destroy(gameObject, 3);
+            if (lootPrefabs.Length > 0)
+            {
+                int randomIndex = Random.Range(0, lootPrefabs.Length);
+                Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            }
+
+            //Instantiate(deadVFX, deadTransform.position, deadTransform.rotation);
+            Destroy(gameObject, 3);
+        }
     }
 
     //

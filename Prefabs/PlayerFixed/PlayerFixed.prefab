@@ -1,97 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &417005203799242185
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5936938867805710846}
-  - component: {fileID: 2721456002268523420}
-  - component: {fileID: 6698506006843184832}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5936938867805710846
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417005203799242185}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.29413462, y: 0.19828892, z: -0.062520236, w: 0.932876}
-  m_LocalPosition: {x: -6.07, y: 6.4700003, z: -8}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8483905908641657711}
-  m_LocalEulerAnglesHint: {x: 35, y: 24, z: 0}
---- !u!20 &2721456002268523420
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417005203799242185}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!81 &6698506006843184832
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 417005203799242185}
-  m_Enabled: 1
 --- !u!1 &7641395434669976701
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,8 +13,8 @@ GameObject:
   - component: {fileID: 7449636618721201536}
   - component: {fileID: 2016790957795561680}
   - component: {fileID: -9010301109796115382}
-  - component: {fileID: 6337480772221473631}
-  - component: {fileID: 2697327472345006848}
+  - component: {fileID: -5520635349496212470}
+  - component: {fileID: -2004835877654640123}
   m_Layer: 0
   m_Name: PlayerFixed
   m_TagString: Player
@@ -127,7 +35,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5936938867805710846}
   - {fileID: 9109014979410794859}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,7 +137,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6337480772221473631
+--- !u!114 &-5520635349496212470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,30 +146,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7641395434669976701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a702cc3b758b4b7684bc094af16709b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0750306983e5c4085be590a2fc51e796, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseSens: 200
+  maxXRotation: 35
+  minRotation: -25
+--- !u!114 &-2004835877654640123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641395434669976701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e79111e181714d0284b9cb3bfaa079f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
   gravity: 9.81
   airControl: 10
-  hitSFX: {fileID: 8300000, guid: 74f691bc61916442c8eb20bb22125a76, type: 3}
+  hitSFX: {fileID: 8300000, guid: d160bebedb4ca413bb34bbee0a5d1223, type: 3}
   playerDamage: 10
   healthslider: {fileID: 0}
---- !u!114 &2697327472345006848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7641395434669976701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a5dfff57fca040c693f7a491b6c7c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSens: 200
-  maxXRotation: 35
-  minRotation: -20
 --- !u!1001 &2693695487836132967
 PrefabInstance:
   m_ObjectHideFlags: 0

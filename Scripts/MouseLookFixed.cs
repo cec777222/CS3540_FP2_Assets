@@ -10,7 +10,7 @@ public class MouseLookFixed : MonoBehaviour
     public float minRotation = -25;
     private float xRotation = 0f; // Current rotation around the X-axis
 
-    private Transform cameraTransform; 
+    private Transform cameraTransform;
     private float initialYRotation;
     private float initialZRotation;
 

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1016955700859725021}
   - component: {fileID: 2122532148060020982}
+  - component: {fileID: 2270399367239644360}
   m_Layer: 0
   m_Name: AttackHitBox
   m_TagString: EnemyAttackHitBox
@@ -25,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508123097492547072}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.21366677, y: -0.17754637, z: 0.03952367, w: 0.9598238}
-  m_LocalPosition: {x: 0.031, y: 0.426, z: 2.538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.031, y: 1.12, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1418473829732304588}
-  m_LocalEulerAnglesHint: {x: 25.1, y: -20.96, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2122532148060020982
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -51,8 +52,21 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23, y: 0.17, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 1.5, z: 2}
+  m_Center: {x: 0, y: 0, z: 1.5}
+--- !u!114 &2270399367239644360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508123097492547072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2926d6959480a48b48c6501e6fe709bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 20
 --- !u!1 &6673498921512971051
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,15 +179,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 475d05aae8eb3a94882ab417b6df0f25, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.5609474
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 475d05aae8eb3a94882ab417b6df0f25, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.151
+      value: 0.2838974
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 475d05aae8eb3a94882ab417b6df0f25, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.56
+      value: -26.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 475d05aae8eb3a94882ab417b6df0f25, type: 3}
       propertyPath: m_LocalRotation.w
@@ -265,7 +279,7 @@ Animator:
   m_GameObject: {fileID: 1793768293422701686}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8951071eec71cd944b09879123037783, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6f46f601d6bd1694089db5479f71409e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -322,7 +336,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.37, y: 2.06, z: 1}
+  m_Size: {x: 1.5, y: 2.06, z: 1}
   m_Center: {x: 0, y: 0.99, z: 0.19}
 --- !u!114 &3848176041725168705
 MonoBehaviour:
@@ -343,7 +357,11 @@ MonoBehaviour:
   player: {fileID: 0}
   AttackHitBox: {fileID: 1508123097492547072}
   attackDelay: 4
-  lootPrefabs: []
+  lootPrefabs:
+  - {fileID: 1825169943741794320, guid: 1af134d427ab04896ada98d841d4cdd0, type: 3}
+  - {fileID: 7749533367711679839, guid: 0e220300498ce490b851b12971382a00, type: 3}
+  - {fileID: 2079530809401394673, guid: 258d7af4f47ef484dafe8d770ab98562, type: 3}
+  damage: 20
 --- !u!114 &6839243127518535834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,9 +375,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 100
-  currentHealth: 0
-  enemyHitSFX: {fileID: 0}
-  healthSlider: {fileID: 4623422719905069053}
+  currentHealth: 100
+  enemyHitSFX: {fileID: 8300000, guid: 9d534a59f39094d52bfec0fbb44e9c52, type: 3}
+  enemyHealthSlider: {fileID: 4623422719905069053}
 --- !u!1001 &2454516428232142734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,7 +388,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5454918593343544368, guid: 8c4129f171d12804298ef5884b522379, type: 3}
       propertyPath: m_Name
-      value: HealthSlider
+      value: EnemyHealthSlider
       objectReference: {fileID: 0}
     - target: {fileID: 7415699409750688004, guid: 8c4129f171d12804298ef5884b522379, type: 3}
       propertyPath: m_Pivot.x

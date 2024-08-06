@@ -9,36 +9,45 @@ public class PlayerControllerFixed : MonoBehaviour
     public float gravity = 9.81f;
     public float airControl = 10;
     public static int playerHealth = 100;
+    public float jumpHeight = 2f;
 
     public AudioClip hitSFX;
-
 
     public int playerDamage = 10;
 
     CharacterController controller;
     Vector3 input, moveDirection;
 
-    Renderer playerRender;
+    //Renderer playerRender;
     GameObject weapon;
     public Slider healthslider;
     int currentHealth;
 
+    int damageRate;
+
+
     bool isBlocking;
     private bool playerDead = false;
 
-    private LevelManager levelManager;
+    Animator playerAnim;
+
+    LevelManager levelManager;
+
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        damageRate = 1;
         isBlocking = false;
-        playerRender = GetComponent<Renderer>();
+        //playerRender = GetComponent<Renderer>();
         weapon = GameObject.FindGameObjectWithTag("PlayerWeapon");
+        playerAnim = GetComponent<Animator>();
 
         currentHealth = playerHealth;
         healthslider.value = currentHealth;
-    }
 
+        levelManager = FindObjectOfType<LevelManager>();
+    }
 
     void Update()
     {
@@ -51,26 +60,53 @@ public class PlayerControllerFixed : MonoBehaviour
         if (controller.isGrounded)
         {
             moveDirection = input;
+
+            if (Input.GetButton("Jump"))
+            {
+                moveDirection.y = Mathf.Sqrt(2 * jumpHeight * gravity);
+            }
+            else
+            {
+                moveDirection.y = 0.0f;
+            }
+        }
+
+        else
+        {
+            input.y = moveDirection.y;
+            moveDirection = Vector3.Lerp(moveDirection, input, airControl * Time.deltaTime);
         }
 
         moveDirection.y -= gravity * Time.deltaTime;
+
         controller.Move(moveDirection * Time.deltaTime);
 
+        if (controller.velocity.z < 0/*moveHorizontal != 0 || moveVertical != 0*/)
+        {
+            playerAnim.SetInteger("animState", 1);
+        }
+        if (controller.velocity == Vector3.zero)
+        {
+            playerAnim.SetInteger("animState", 0);
+        }
+        controller.Move(moveDirection * Time.deltaTime);
         if (Input.GetMouseButton(1))
         {
             isBlocking = true;
-
-            playerRender.material.color = Color.blue;
+            playerAnim.SetInteger("animState", 4);
+            //playerRender.material.color = Color.blue;
         }
         else
         {
             isBlocking = false;
-            playerRender.material.color = Color.white;
+            //playerRender.material.color = Color.white;
         }
 
         if (Input.GetMouseButton(0))
         {
-            weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
+            //HOLD DOWN THE BUTTON or you will not see the animation :)
+            playerAnim.SetInteger("animState", 3);
+            //weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
         }
     }
 
@@ -88,22 +124,18 @@ public class PlayerControllerFixed : MonoBehaviour
             }
 
             healthslider.value = currentHealth;
-            Debug.Log(currentHealth);
-            Debug.Log("hp" + healthslider.value);
         }
         if (currentHealth <= 0 && !playerDead)
         {
             PlayerDies();
             playerDead = true;
+
         }
     }
 
-  
-
     void PlayerDies()
     {
-        transform.Rotate(-90, 0, 0, Space.Self);
         levelManager.LevelLost();
+        playerAnim.SetInteger("animState", 5);
     }
 }
-

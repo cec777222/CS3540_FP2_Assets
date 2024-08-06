@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 
     public AudioClip gameOverSFX;
     public AudioClip gameWonSFX;
+    public AudioClip backgroundMusicSFX;
 
     public static bool isGameOver = false; // Check if the game is lost
 
@@ -25,7 +26,6 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         InitializeLevel();
-
     }
 
     void InitializeLevel() // Function that will reset everything when the scene is loaded, for now using the start function
@@ -36,6 +36,7 @@ public class LevelManager : MonoBehaviour
         gameText.gameObject.SetActive(false); // Need to uncheck the gameText box in the inspector
         stopWatch = startTimer;
         enemyKillCount = 0;
+        AudioSource.PlayClipAtPoint(backgroundMusicSFX, transform.position);
 
     }
 

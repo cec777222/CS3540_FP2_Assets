@@ -48,6 +48,7 @@ public class CatfishEnemyAI : MonoBehaviour
     Transform deadTransform;
     bool isDead;
     public GameObject[] lootPrefabs;
+    public int damage = 20;
 
     //int randInt = 101;
 
@@ -192,18 +193,23 @@ public class CatfishEnemyAI : MonoBehaviour
 
     void UpdateDeadState()
     {
-        m_Animator.SetInteger("AnimationInt", 6);
-        isDead = true;
-        deadTransform = gameObject.transform;
 
-        if (lootPrefabs.Length > 0)
+        if (!isDead)
         {
-            int randomIndex = Random.Range(0, lootPrefabs.Length);
-            Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
-        }
+            LevelManager.enemyKillCount += 1;
+            m_Animator.SetInteger("AnimationInt", 6);
+            isDead = true;
+            deadTransform = gameObject.transform;
 
-        //Instantiate(deadVFX, deadTransform.position, deadTransform.rotation);
-        Destroy(gameObject, 3);
+            if (lootPrefabs.Length > 0)
+            {
+                int randomIndex = Random.Range(0, lootPrefabs.Length);
+                Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
+            }
+
+            //Instantiate(deadVFX, deadTransform.position, deadTransform.rotation);
+            Destroy(gameObject, 3);
+        }
     }
 
     //
@@ -240,7 +246,7 @@ public class CatfishEnemyAI : MonoBehaviour
             }
         }
     }
-
+   
     void ActivateHitBox()
     {
         AttackHitBox.SetActive(true);
@@ -252,6 +258,11 @@ public class CatfishEnemyAI : MonoBehaviour
         shouldBattleIdle = true;
         AttackHitBox.SetActive(false);
     }
+
+
+
+
+
 
     /*
     //Draws spheres depicting distances for enemy interactions.

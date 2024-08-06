@@ -14,16 +14,23 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     private bool playerDetected;
     private bool currentlyShooting;
 
+
     // For enemy death and loot pickup.
     public AudioClip deadSFX;
+    public AudioClip shootSFX;
     public GameObject[] lootPrefabs;
     public AudioClip enemyHitSFX;
 
     public static int projectileEnemyCount;
 
+    private bool isDead = false;
+
+    private PlayerControllerFixed playerControllerFixedx;
+
     // Start is called before the first frame update
     void Start()
     {
+
         // Finds the player object.
         if (player == null)
         {
@@ -38,6 +45,10 @@ public class ProjectileEnemyBehavior : MonoBehaviour
         currentHealth = startingHealth;
 
         projectileEnemyCount += 1;
+
+        playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
+
+
 
     }
 
@@ -78,6 +89,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
     void Shoot()
     {
+        AudioSource.PlayClipAtPoint(shootSFX, transform.position);
         GameObject projectile;
         projectile = Instantiate(projectilePrefab, transform.position + transform.forward, transform.rotation);
         projectile.transform.SetParent(GameObject.FindGameObjectWithTag("ProjectileParent").transform);
@@ -100,21 +112,22 @@ public class ProjectileEnemyBehavior : MonoBehaviour
         //AudioSource.PlayClipAtPoint(deadSFX, transform.position);
         LevelManager.enemyKillCount += 1;
 
-        if (lootPrefabs.Length > 0)
+
+        if (lootPrefabs.Length > 0 && !isDead)
         {
+            isDead = true;
             int randomIndex = Random.Range(0, lootPrefabs.Length);
             Instantiate(lootPrefabs[randomIndex], transform.position + Vector3.up * 0.5f, Quaternion.identity);
         }
         Destroy(gameObject, 0.5f);
     }
 
-    void OnTriggerEnter(Collider collision)
-    {   
+    private void OnCollisionEnter(Collision collision)
+    {
         if (collision.gameObject.CompareTag("PlayerWeapon"))
         {
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
-            EnemyAttacked(10);
+            EnemyAttacked(playerControllerFixedx.playerDamage);
         }
-            
     }
 }
