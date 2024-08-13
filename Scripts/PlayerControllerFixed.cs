@@ -13,7 +13,7 @@ public class PlayerControllerFixed : MonoBehaviour
 
     public AudioClip hitSFX;
 
-    public int playerDamage = 10;
+    public static int playerDamage = 10;
 
     CharacterController controller;
     Vector3 input, moveDirection;
@@ -33,6 +33,7 @@ public class PlayerControllerFixed : MonoBehaviour
 
     LevelManager levelManager;
 
+    public GameObject AttackHitBox;
 
     void Start()
     {
@@ -47,6 +48,13 @@ public class PlayerControllerFixed : MonoBehaviour
         healthslider.value = currentHealth;
 
         levelManager = FindObjectOfType<LevelManager>();
+
+        if (AttackHitBox == null)
+        {
+            AttackHitBox = GameObject.FindGameObjectWithTag("PlayerWeaponAttackHitBox");
+        }
+
+        AttackHitBox.SetActive(false);
     }
 
     void Update()
@@ -106,8 +114,21 @@ public class PlayerControllerFixed : MonoBehaviour
         {
             //HOLD DOWN THE BUTTON or you will not see the animation :)
             playerAnim.SetInteger("animState", 3);
+            var animDuration = playerAnim.GetCurrentAnimatorStateInfo(0).length;
+            Invoke("ActivateHitBox", animDuration * 0.5f);
+            Invoke("DeactivateHitBox", animDuration);
             //weapon.GetComponent<Animator>().SetTrigger("WeaponSwung");
         }
+    }
+
+    void ActivateHitBox()
+    {
+        AttackHitBox.SetActive(true);
+    }
+
+    void DeactivateHitBox()
+    {
+        AttackHitBox.SetActive(false);
     }
 
     public void TakeDamage(int damage)

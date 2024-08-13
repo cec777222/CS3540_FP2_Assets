@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    public int startingHealth = 100;
+    public int startingHealth = 30;
     public int currentHealth;
     public AudioClip enemyHitSFX;
     public Slider enemyHealthSlider;
 
-    private PlayerControllerFixed playerControllerFixedx;
+    //private PlayerControllerFixed playerControllerFixedx;
 
     void Awake()
     {
@@ -24,7 +24,7 @@ public class EnemyHealth : MonoBehaviour
 
         currentHealth = startingHealth;
         enemyHealthSlider.value = currentHealth;
-        playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
+        //playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
 
     }
 
@@ -43,12 +43,12 @@ public class EnemyHealth : MonoBehaviour
 
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        if (other.gameObject.CompareTag("PlayerWeaponAttackHitBox"))
         {
         AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
-        TakeDamage(playerControllerFixedx.playerDamage);
+        TakeDamage(PlayerControllerFixed.playerDamage);
         }
     }
 

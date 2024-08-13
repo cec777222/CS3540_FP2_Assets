@@ -25,7 +25,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
     private bool isDead = false;
 
-    private PlayerControllerFixed playerControllerFixedx;
+    //private PlayerControllerFixed playerControllerFixedx;
 
     // Start is called before the first frame update
     void Start()
@@ -46,10 +46,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
         projectileEnemyCount += 1;
 
-        playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
-
-
-
+        //playerControllerFixedx = player.GetComponent<PlayerControllerFixed>();
     }
 
     // Update is called once per frame
@@ -122,12 +119,13 @@ public class ProjectileEnemyBehavior : MonoBehaviour
         Destroy(gameObject, 0.5f);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("PlayerWeapon"))
+        if (other.gameObject.CompareTag("PlayerWeaponAttackHitBox"))
         {
+            Debug.Log("HIT");
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
-            EnemyAttacked(playerControllerFixedx.playerDamage);
+            EnemyAttacked(PlayerControllerFixed.playerDamage);
         }
     }
 }
