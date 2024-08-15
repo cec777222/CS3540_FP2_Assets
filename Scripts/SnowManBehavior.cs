@@ -51,7 +51,7 @@ public class SnowManBehavior : MonoBehaviour
         */
         //Sets health.
         currentHealth = startingHealth;
-        //healthSlider.value = currentHealth;
+        healthSlider.value = currentHealth;
 
         //Setting booleans.
         moveToPlayer = false;
