@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProjectileEnemyBehavior : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     public float detectDistance = 10f;
     public int startingHealth = 30; // Assuming a player's attack is 10 damage.
     int currentHealth;
+    public Slider enemyHealthSlider;
     private bool playerDetected;
     private bool currentlyShooting;
 
@@ -43,6 +45,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
 
         // Sets health.
         currentHealth = startingHealth;
+        enemyHealthSlider.value = currentHealth;
 
         projectileEnemyCount += 1;
 
@@ -97,6 +100,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
         if (currentHealth > 0)
         {
             currentHealth -= damageTaken;
+            enemyHealthSlider.value = currentHealth;
         }
         if (currentHealth <= 0)
         {
@@ -123,7 +127,7 @@ public class ProjectileEnemyBehavior : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerWeaponAttackHitBox"))
         {
-            Debug.Log("HIT");
+            //Debug.Log("HIT");
             AudioSource.PlayClipAtPoint(enemyHitSFX, transform.position);
             EnemyAttacked(PlayerControllerFixed.playerDamage);
         }
